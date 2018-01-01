@@ -1,0 +1,231 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>大转盘活动</title>
+
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<link href="js/dialog/dialog.css" rel="stylesheet" type="text/css">
+	</head>
+	<div style="display: none;" id="loadImageBox">
+		<img src="images/1.png">
+		<img src="images/2.png">
+	</div>
+	<body>
+		
+		<style type="text/css">
+			/*横屏*/
+			@media all and (orientation : landscape) { 
+				body{
+					background:url("images/1920x1080.jpg") no-repeat center center ;
+					background-size: cover;
+				}
+			}
+			/*竖屏*/
+			@media all and (orientation : portrait) { 
+				body{
+					background:url("images/1080x1920.jpg") no-repeat center center ;
+					background-size: cover;
+				}
+			}  
+		</style>
+		
+		<div class="testButtons" style="position: fixed;z-index: 1000;">
+			<button id="btn1">抽奖</button>
+			<button id="btn2">中奖</button>
+			<button id="btn3">没有中奖</button>
+		</div>
+		
+		
+		
+		<div class="turnplateBox">
+			<div class="turnplate" id="turnplate"></div>
+		</div>
+		
+		
+		
+		
+		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="js/dialog/dialog.js"></script>
+		<script type="text/javascript" src="js/qrcode.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/bgm.js"></script>
+		<script type="text/javascript" src="js/award.js?v=22"></script>
+		
+		
+		
+		<script type="text/javascript">
+			
+			//alertBox("阿达说得好",70000,"error");
+			$(function(){
+				// state状态 ， 初始化为0
+				//0 未播放状态  1空闲状态 2.中奖 3.未中奖4.超时 5.正在转
+				var bgm = new Bgm({
+					//背景音乐
+					sparetime : ['mp3/1.mp3','mp3/2.mp3'] ,
+					yes : 'mp3/3.mp3' , //中奖
+					no : 'mp3/4.mp3' , //没中奖
+					timeout : 'mp3/5.mp3' ,//超时音乐
+					playing : 'mp3/6.mp3' , //正在抽奖音乐
+					time : 2000 , //背景音乐每隔多久换一次
+					callbacks : {
+						//超时回调
+						timeout : function(){
+							bgm.setState(1);
+							alertBox("超时了") ;
+						}
+					}
+				}) ;
+				
+				
+				
+				
+				
+				var turnplate = new Turnplate(".turnplate",{
+					music : {
+						src : 'http://pic.ibaotu.com/00/22/12/58k888piCbiR.mp3' ,
+						autoplay :false,
+						loop : true
+					},
+					//bodybg :'#e62d2d' ,
+					bgimg : 'images/b1.png' ,
+					pointerImage : 'images/turnplate-pointer.png' ,
+					//抽奖完成回调
+					complete : function(item){
+						alertBox(item.txt);
+						console.log(item);
+					},
+					//是否开启概率 , 开启的话概率和必须是100
+					isProbability : true ,
+					//items的概率之和必须是100 ， 尽量不要用小数
+					items : [
+						{
+							bgcolor :'#FFF4D6' ,
+							txt : '50M免费流量包' ,
+							val : 0   // 这个代表概率   5%
+						},
+						{
+							bgcolor :'#fff' ,
+							txt : '10闪币' ,
+							icon:'images/1.png',
+							val :5 
+						},
+						{
+							bgcolor :'#FFF4D6' ,
+							txt : '谢谢参与' ,
+							icon:'images/2.png' ,
+							val : 10 ,
+						},
+						{
+							bgcolor :'#fff' ,
+							txt : '20闪币' ,
+							icon:'images/1.png',
+							val : 80 
+						},
+						{
+							bgcolor :'#FFF4D6' ,
+							txt : '100M流量' ,
+							val : 0 
+						},
+						{
+							bgcolor :'#fff' ,
+							txt : '5闪币' ,
+							icon:'images/1.png',
+							val : 5 
+						},
+					]
+				});
+				
+				
+				//设置背景色
+				//turnplate.setBodyBg("blue");
+				//播放背景音乐
+				//turnplate.audioPlay();
+				//关闭背景音乐
+				//turnplate.audioPlay();
+				//刷新
+				//turnplate.reload();
+				//后退
+				//turnplate.goBack();
+				//前往某个页面
+				//turnplate.go(url);
+				//显示指针的图片 
+				turnplate.showPointerImage();
+				
+				//显示二维码的图片
+				//turnplate.showQrcodeImage('http://www.baidu.com') ;
+				
+				//显示一张图  (设置为true就是只显示图片 ， 不设置就是生成二维码)
+				//var imgUrl = 'images/sma.jpg' ;
+				//turnplate.showQrcodeImage(imgUrl,true,true) ;
+				
+				//开始抽奖
+				//turnplate.start() ;
+				//设置是否开启概率控制
+				//turnplate.setProbabilityState(false);
+				
+				//倒计时处理
+				/*
+				turnplate.timeOut(5,function(){
+					alertBox('倒计时结束了') ;
+				},function(time){
+					$("#timeNum").text(time) ;
+				});
+				*/
+				
+				//播放背景音乐
+				/*
+				bgm.setState(1);
+				document.addEventListener("WeixinJSBridgeReady", function () {
+       				bgm.setState(1);
+				}, false);
+				*/
+				
+				
+				setTimeout(function(){
+					//turnplate.start();
+				},3000);
+				
+				
+				$("#showQrcodeBox").on("click",function(){
+					bgm.setState(5) ;
+					turnplate.start();
+				})
+				
+				$("#btn1").on("click",function(){
+					bgm.setState(5) ;
+					turnplate.start();
+				});
+				$("#btn2").on("click",function(){
+					bgm.setState(2) ;
+				});
+				$("#btn3").on("click",function(){
+					bgm.setState(3) ;
+				});
+				$("#btn4").on("click",function(){
+					bgm.initTimeout(3);
+				});
+				
+			});
+			
+			
+			
+			backgroundRotate();
+			function backgroundRotate(){
+				var turnplate = $("#turnplate") ;
+				var index = 1 ;
+				if( turnplate && turnplate.length ){
+					setInterval(function(){
+						index = index == 1 ? 2 : 1 ;
+						turnplate.css({backgroundImage:'url("images/b'+index+'.png")'});
+					},300);
+					
+				}
+			}
+			
+		</script>
+		
+		
+	</body>
+
+</html>

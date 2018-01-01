@@ -1,0 +1,115 @@
+﻿body{overflow-x: hidden;}
+/* 大转盘样式 */
+.turnplateBox{
+	position: fixed;
+	display: block;
+	/*
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-60%);
+	width: 95%;
+	*/
+	top: 0;
+	left: 0;
+	display: -webkit-flex;
+	display: flex;
+	width: 100%;
+	height: 100%;
+	-webkit-align-items: center;
+	align-items: center;
+	
+	-webkit-justify-content: center;
+	justify-content: center;
+	
+}
+
+
+.turnplateBox .turnplate{
+	display:block;width:100%;position:relative;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center center;
+	opacity: 0;
+}
+
+.turnplateBox .turnplate canvas.item{width:100%;height: 100%;}
+.turnplateBox .turnplate .showIconBox{
+	position:
+	absolute;
+	width:33.5%;
+	height:42.5%;
+	left:33.6%;
+	top:21.8%;
+	opacity: 0;
+}
+/*二维码 位置样式*/
+#showQrcodeBox{
+	width:21.5%;
+	z-index: 8;
+	height: 21.5%;
+	top: 39%;
+	left:39%;
+}
+
+
+#showQrcodeBox{
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% auto;
+	z-index: 100;
+}
+.turnplateBox .turnplate .showIconBox img{
+	width: 100%;
+}
+
+#showIconBox{z-index: 10;}
+.pointerImage{
+	
+}
+
+
+.gameRule{
+	font-size: 12px;
+	color: #fff;
+	display: block;
+	line-height: 1.4;
+	position: fixed;
+	left: 2%;
+	bottom: 20px;
+}
+ol,ul{list-style: none;}
+.gameRule *{
+	padding: 0;
+	margin: 0;
+}
+
+.gameInfo{
+	position: fixed;
+	z-index: 1;
+	width: 100%;
+	text-align: center;
+	font-size: 10px;
+	color: #ddd;
+	left: 0;
+	bottom: 5px;
+	
+	-webkit-transform: scale(0.8);
+	transform: scale(0.8);
+}
+
+.timer {
+	position: fixed;
+	z-index: 1;
+    width: 110px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #FFBE04;
+    border-radius: 40px;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #444;
+}
+
+
